@@ -1,0 +1,20 @@
+<h2>Hi! You're on the homepage.</h2>
+    {{#if status}}
+        <h4>You're logged in, you rock 😎</h4>
+
+    <section id='insert-and-read'>
+      <div class='container mt-2'>
+        <div class='jumbotron'>
+          <br />
+          <hr>
+
+          <!-- Acá se inserta la lista de productos en caso de que existan -->
+          <div id='product-list'></div>
+        </div>
+      </div>
+    </section>
+
+    {{else}}
+       <h4>Oops! Looks like you're not logged in 😲</h4>
+    {{/if}}
+
