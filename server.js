@@ -1,7 +1,7 @@
 import express from "express";
-import productRouter from './routes/product.js';
-import cartRouter from './routes/cart.js';
-import userRouter from './routes/user.js';
+import productRouter from './src/routes/product.js';
+import cartRouter from './src/routes/cart.js';
+import userRouter from './src/routes/user.js';
 //import otherRouter from './routes/other.js';
 import session from 'express-session';
 import {engine} from 'express-handlebars';
@@ -10,8 +10,8 @@ import {fileURLToPath} from 'url';
 import mongoStore from 'connect-mongo';
 import compression from 'compression';
 import minimist from 'minimist';
-import logger from "./loggers/Log4jsLogger.js";
-import loggerMiddleware from "./middlewares/routesLogger.middleware.js";
+import logger from "./src/loggers/Log4jsLogger.js";
+import loggerMiddleware from "./src/middlewares/routesLogger.middleware.js";
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,8 +26,8 @@ app.set('view engine', 'hbs');
 app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'index.hbs',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials'
+    layoutsDir:'./src/views/layouts',
+    partialsDir:'./src/views/partials'
 }))
 
 app.use(
@@ -52,7 +52,6 @@ app.use(express.urlencoded({extended:true}));
 app.use('/api/productos', productRouter);
 app.use('/api/carrito', cartRouter);
 app.use('/api/usuario', userRouter);
-//app.use('/test', otherRouter);
 
 
 app.all("*", (req, res) => {

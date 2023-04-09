@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
-import {UsuarioDao} from '../dao/UsuarioDao.js';
+import { UsuarioDao } from '../dao/UsuarioDao.js';
+import { ProductosModel } from "../modules/productos.modules.js";
 import { sendGmail } from "../notifications/gmail/EmailSender.js";
 import { htmlNewUserTemplate } from "../notifications/gmail/htmltemplates/NewUserCreatedTemplate.js";
 
@@ -56,8 +57,15 @@ router.post('/login', async(req, res) => {
 })
 
 router.get('/', async(req, res) => {
-    res.render('pages/home', {status: req.session.login})
+    const productos = await ProductosModel.find().lean();
+    console.log(productos);
+    res.render('pages/home', {status: req.session.login, productos});
 })
+
+/*const home = async(req,res)=> {
+    const videogames = await videogamesModel.find().lean();
+    console.log(videogames);
+    res.render('home',{videogames});*/
 
 router.get('/logout', async(req, res) => {
     if (!req.session.login) {

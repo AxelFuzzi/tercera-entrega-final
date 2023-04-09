@@ -7,13 +7,22 @@ import logger from "../loggers/Log4jsLogger.js";
 
 // GET api/productos
 
-router.get('/', async (_req, res) => {
+//router.get('/', async (_req, res) => {
+//    const products = await productoDao.getAll();
+//    products
+//        ? res.status(200).json(products)
+//        : res.status(400).json({"error": "there was a problem when trying to get the products"})
+//    
+//})
+
+
+
+router.get('/', async (_req, res)=>{
     const products = await productoDao.getAll();
-    products
-        ? res.status(200).json(products)
-        : res.status(400).json({"error": "there was a problem when trying to get the products"})
-    
+    res.send(products); 
 })
+
+
 
 // GET api/productos/:id
 
@@ -26,7 +35,7 @@ router.get('/:id', async(req, res) => {
         : res.status(400).json({"error": "product not found"})
     
 })
-
+// 
 
 // POST api/productos
 router.post('/', authMiddleware, async (req,res) => {

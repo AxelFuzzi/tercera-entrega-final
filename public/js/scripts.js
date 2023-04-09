@@ -25,32 +25,3 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-import axios from 'axios';
-
-const productList = document.getElementById('product-list')
-
-axios.get("http://localhost:3031/api/productos") // acá con axios hacemos el get a la ruta correspondiente (recorda importar axios en tu index.html)
-.then((products)=>{
-const table = products.data.map((res)=>
-`<div class ='table-responsive'>
-<table class='table table-dark'>
-  <tr>
-    <th>Nombre</th>
-    <th>Precio</th>
-    <th>Foto</th>
-  </tr>
-  <tr>
-    <td>${res.title}</td>
-    <td>$${res.price}</td>
-    <td>
-      <img
-      width='50'
-      src=${res.image}
-      alt='Image not found'/>
-    </td>
-  </tr>
-</table>
-</div>`
-  )
-  productList.innerHTML = `<div>${table}</div>`
-})
